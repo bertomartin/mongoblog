@@ -45,3 +45,4 @@ end
 
 gem 'mongoid', '~> 5.0.0'
 gem 'devise'
+gem 'haml-rails'
