@@ -46,3 +46,4 @@ end
 gem 'mongoid', '~> 5.0.0'
 gem 'devise'
 gem 'haml-rails'
+gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
