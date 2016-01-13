@@ -1,5 +1,7 @@
 class Article
   include Mongoid::Document
+  include Mongoid::Slug
+  slug :title
 
   field :title, type: String
   field :content, type: String
