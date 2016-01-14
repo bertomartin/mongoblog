@@ -1,6 +1,5 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!, only: [:edit, :update, :destroy, :new]
   # GET /articles
   # GET /articles.json
   def index
@@ -10,7 +9,7 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
-    @comment = @article.comments.build()
+    # @comment = @article.comments.build
   end
 
   # GET /articles/new

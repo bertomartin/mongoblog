@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
       if @comment.save
         format.html {redirect_to @article, notice: 'Comment was successfully created.'}
       else
-        format.html { render action: 'new' }
+        format.html { redirect_to @article }
       end
     end
   end
@@ -32,7 +32,7 @@ class CommentsController < ApplicationController
 
   private
     def comment_params
-      params.require(:comment).permit(:body)
+      params.require(:comment).permit(:name, :body)
     end
 
     def load_article

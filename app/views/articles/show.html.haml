@@ -14,13 +14,17 @@
       %blockquote
         %p=comment.body
         %footer
-          #{comment.name},
-          %em=comment.id.generation_time
+          %div=comment.name
+          %em=time_ago_in_words comment.id.generation_time
 %br/
+-# = link_to 'Edit', edit_article_path(@article)
+|
+= link_to 'Back', articles_path
 
 %h3 Add a comment
 
-= form_for ([@article, @comment]) do |f|
+= form_for ([@article, @article.comments.build]) do |f|
+  = render 'shared/error_messages', target: @article
   .field
     = f.label :name
     %br/
@@ -31,8 +35,3 @@
     = f.text_area :body
   .actions
     = f.submit
-
-
-= link_to 'Edit', edit_article_path(@article)
-|
-= link_to 'Back', articles_path

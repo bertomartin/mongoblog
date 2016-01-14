@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :articles do
+
+  namespace :admin do
+    resources :articles
+  end
+
+  resources :articles, only: [:show, :index] do
     resources :comments
   end
   # The priority is based upon order of creation: first created -> highest priority.
