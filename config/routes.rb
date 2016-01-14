@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :articles
   end
 
-  resources :articles do
+  resources :articles, only: [:show, :index] do
     resources :comments
   end
   # The priority is based upon order of creation: first created -> highest priority.

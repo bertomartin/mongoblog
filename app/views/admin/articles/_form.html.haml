@@ -1,0 +1,16 @@
+= form_for(@article) do |f|
+  = render 'shared/error_messages', target: @article
+  .field
+    = f.label :title
+    %br/
+    = f.text_field :title
+  .field
+    = f.label :content
+    %br/
+    = f.text_area :content
+  .field
+    = f.label :published
+    %br/
+    = f.check_box :published
+  .actions
+    = f.submit
