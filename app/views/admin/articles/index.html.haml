@@ -10,6 +10,7 @@
     - @articles.each do |article|
       %tr
         %td= article.title
+        %td= article.tag
         %td= article.content
         %td= link_to 'Show', admin_article_path(article)
         %td= link_to 'Edit', edit_admin_article_path(article)

@@ -12,3 +12,12 @@
         %td= article.title
         %td= article.content
         %td= link_to 'Show', article
+        
+        %div
+          %p= article.tag
+          - article.tag.each do |t|
+            %p= link_to t, article
+%p
+%div 
+  %h2 
+  %h1 TAGS

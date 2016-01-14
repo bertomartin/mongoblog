@@ -1,9 +1,13 @@
-= form_for(@article) do |f|
+= form_for([:admin,@article]) do |f|
   = render 'shared/error_messages', target: @article
   .field
     = f.label :title
     %br/
     = f.text_field :title
+  .field
+    = f.label :tag
+    %br/    
+    = f.text_field  :tag
   .field
     = f.label :content
     %br/
