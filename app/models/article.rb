@@ -10,4 +10,5 @@ class Article
   field :published, type: Boolean, default: false
 
   embeds_many :comments
+  resourcify
 end
