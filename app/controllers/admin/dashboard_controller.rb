@@ -1,6 +1,4 @@
-class Admin::DashboardController < ApplicationController
-  before_filter :authenticate_user!
-
+class Admin::DashboardController < Admin::BaseController
   def index
   end
 end
