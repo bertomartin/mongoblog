@@ -1,19 +1,13 @@
 class Admin::BaseController < ApplicationController
   layout 'admin'
-  # before_filter :require_admin_user
   before_filter :authenticate_user!
+  before_filter :is_admin?
+
 
   private
 
-  def require_admin_user
-    if current_user
-      if current_user.has_role? "admin"
-       return true
-     end
-    else
-      return false
-    end
-
+  def is_admin?
+    return current_user.has_role? "admin"
   end
 
 end
