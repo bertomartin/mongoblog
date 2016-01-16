@@ -9,6 +9,12 @@ Rails.application.routes.draw do
   resources :articles, only: [:show, :index] do
     resources :comments
   end
+
+  #
+  # Static pages
+  #
+  get ':action', :controller => 'pages', :as => 'page'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
