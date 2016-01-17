@@ -14,8 +14,6 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -50,3 +48,14 @@ gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
 gem 'mongoid-slug'
 gem 'cancancan'
 gem 'rolify'
+
+# google
+# these gems will be used to connect to google and bring back the analytics produced by Google Analytics
+gem 'google-api-client', '0.9.pre5'
+gem 'googleauth', '0.4.2'
+
+# google dashboard
+gem 'ga_dashboard'
+
+# google analytics helpers
+gem 'google-analytics-rails', '1.0.0'

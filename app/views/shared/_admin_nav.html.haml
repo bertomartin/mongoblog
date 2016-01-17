@@ -2,9 +2,7 @@
   %a.navbar-brand{:href => "#"} MongoBlog Admin
   %ul.nav.navbar-nav
     %li.nav-item.active
-      %a.nav-link{:href => "#"}
-        Home
-        %span.sr-only (current)
+      =link_to "Home", admin_path, class: 'nav-link'
     %li.nav-item
       =link_to "Articles", admin_articles_path, class: 'nav-link'
     %li.nav-item

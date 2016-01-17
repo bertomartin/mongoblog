@@ -1,17 +1,14 @@
-%p#notice= notice
-%p
-  %strong Title:
-  = @article.title
-%p
-  %strong Content:
-  = @article.content
+%h3= @article.title
+.content=@article.content
 
-%h2 Comments
+%p=link_to "See all comments", "#"
 
-%ul.list-unstyled
-  -@article.comments.each do |comment|
-    %li
-      %blockquote
-        %p=comment.body
-        %p=comment.name
-%br/
+/ %h2 Comments
+
+/ %ul.list-unstyled
+/   -@article.comments.each do |comment|
+/     %li
+/       %blockquote
+/         %p=comment.body
+/         %p=comment.name
+/ %br/

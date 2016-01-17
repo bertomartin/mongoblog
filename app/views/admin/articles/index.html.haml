@@ -1,18 +1,17 @@
 .row
   .col-md-12
-    %h1 Listing Articles
-    %table
+    %h3 Articles
+    %table.table.table-striped
       %thead
         %tr
           %th Title
           %th Content
-          %th{:colspan => "3"}
+          %th{:colspan => "2"}
       %tbody
         - @articles.each do |article|
           %tr
-            %td= article.title
+            %td=link_to article.title, admin_article_path(article)
             %td= article.content
-            %td= link_to 'Show', admin_article_path(article)
             %td= link_to 'Edit', edit_admin_article_path(article)
             %td= link_to 'Destroy', admin_article_path(article), method: :delete, data: { confirm: 'Are you sure?' }
     %br/

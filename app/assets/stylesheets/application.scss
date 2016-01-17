@@ -1,4 +1,11 @@
 @import "bootstrap";
+
+/* admin */
+@import "admin/base";
+@import "admin/layout";
+@import "admin/module";
+
+/* site */
 @import "base";
 @import "layout";
 @import "module";
