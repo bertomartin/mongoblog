@@ -4,9 +4,9 @@
   %li.list-inline-item &nbsp;|&nbsp;
   %li.list-inline-item=link_to 'Edit Article', edit_admin_article_path(@article)
 %hr
-.content=@article.content
+.content=simple_format @article.content
 
-%p=link_to "See all comments", "#"
+%p=link_to "See comments", "#"
 
 / %h2 Comments
 
