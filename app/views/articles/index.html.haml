@@ -1,8 +1,7 @@
 .row
   .col-md-8.col-md-offset-2
-    .l-page
-      - @articles.each do |article|
-        %h3=article.title
-        .content=article.content
-        .read-more=link_to 'read more', article
-        %hr
+    - @articles.each do |article|
+      %h3=article.title
+      .content=article.content
+      .read-more=link_to 'read more', article
+      %hr
