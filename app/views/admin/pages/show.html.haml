@@ -1,0 +1,7 @@
+%h3= @page.name
+%ul.list-inline
+  %li.list-inline-item=link_to 'Back to List', admin_pages_path
+  %li.list-inline-item &nbsp;|&nbsp;
+  %li.list-inline-item=link_to 'Edit Page', edit_admin_page_path(@page)
+%hr
+.content=simple_format @page.content
