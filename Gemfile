@@ -51,11 +51,11 @@ gem 'rolify'
 
 # google
 # these gems will be used to connect to google and bring back the analytics produced by Google Analytics
-gem 'google-api-client', '0.9.pre5'
+# gem 'google-api-client', '0.9.pre5'
 gem 'googleauth', '0.4.2'
 
 # google dashboard
-gem 'ga_dashboard'
+# gem 'ga_dashboard'
 
 # google analytics helpers
 gem 'google-analytics-rails', '1.0.0'
