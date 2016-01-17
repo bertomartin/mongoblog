@@ -10,11 +10,11 @@
     %ul.list-unstyled
       -@article.comments.each do |comment|
         %li
-          %blockquote
-            %p=comment.body
-            %footer
-              %div=comment.name
-              %em=time_ago_in_words comment.id.generation_time
+          %blockquote.blockquote
+            %p.m-b-0=comment.body
+            %footer.blockquote-footer
+              =comment.name
+              /# %em=time_ago_in_words comment.id.generation_time
     %br/
 
     %h4 Add a comment

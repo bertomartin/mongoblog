@@ -1,4 +1,9 @@
 %h3= @article.title
+%ul.list-inline
+  %li.list-inline-item=link_to 'Back to List', admin_articles_path
+  %li.list-inline-item &nbsp;|&nbsp;
+  %li.list-inline-item=link_to 'Edit Article', edit_admin_article_path(@article)
+%hr
 .content=@article.content
 
 %p=link_to "See all comments", "#"
