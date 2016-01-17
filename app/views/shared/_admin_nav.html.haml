@@ -1,5 +1,5 @@
 %nav.navbar.navbar-full.navbar-light.bg-faded.navbar-fixed-top
-  %a.navbar-brand{:href => "#"} MongoBlog Admin
+  =link_to "MongoBlog Admin", admin_path, class: 'navbar-brand'
   %ul.nav.navbar-nav
     %li.nav-item.active
       =link_to "Home", admin_path, class: 'nav-link'
