@@ -10,5 +10,6 @@ class Article
   field :published, type: Boolean, default: false
 
   embeds_many :comments
+  belongs_to :user
   resourcify
 end
