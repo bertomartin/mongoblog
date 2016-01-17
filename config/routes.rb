@@ -11,10 +11,13 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  # resources :pages, only: [:show]
+  get ':id', to: 'pages#show', as: :page
+
   #
   # Static pages
   #
-  get ':action', :controller => 'pages', :as => 'page'
+  # get ':action', :controller => 'pages', :as => 'page'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
