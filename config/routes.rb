@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     get '', to: 'dashboard#index', as: '/'
     resources :articles
     resources :pages
+    resource :profile
   end
 
   resources :articles, only: [:show, :index] do
