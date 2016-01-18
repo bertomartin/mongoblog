@@ -1,6 +1,9 @@
 %h1 Your Profile
-%p=@profile.first_name
-%p=@profile.last_name
+- if @profile
+    %p=@profile.first_name
+    %p=@profile.last_name
+    %p=link_to "Edit", "/admin/profile/edit"
+- else
+    %p Please create a profile by clicking edit below.
+    %p=link_to "New Profile", new_admin_profile_path(@profile)
 
-%p
-=link_to "Edit", edit_admin_profile_path(@profile)
