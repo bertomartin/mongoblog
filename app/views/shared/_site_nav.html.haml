@@ -1,0 +1,9 @@
+%nav.navbar.navbar-light.bg-faded
+  %a.navbar-brand{:href => "/"} My Blog
+  %ul.nav.navbar-nav
+    %li.nav-item.active
+      =link_to 'Articles', articles_path, class: 'nav-link'
+    %li.nav-item
+      =link_to 'About Me', page_path("about"), class: 'nav-link'
+  .pull-xs-right
+    facebook, tw, instagram

@@ -2,7 +2,14 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :admin do
+<<<<<<< HEAD
     resources :articles  
+=======
+    get '', to: 'dashboard#index', as: '/'
+    resources :articles
+    resources :pages
+    resource :profile
+>>>>>>> e19e36e5992f0dc0768dc48eaef59c4679530d36
   end
   
   # resources :tag do
@@ -12,6 +19,15 @@ Rails.application.routes.draw do
   resources :articles, only: [:show, :index] do
     resources :comments
   end
+
+  # resources :pages, only: [:show]
+  get ':id', to: 'pages#show', as: :page
+
+  #
+  # Static pages
+  #
+  # get ':action', :controller => 'pages', :as => 'page'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

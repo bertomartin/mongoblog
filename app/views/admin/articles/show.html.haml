@@ -1,17 +1,19 @@
-%p#notice= notice
-%p
-  %strong Title:
-  = @article.title
-%p
-  %strong Content:
-  = @article.content
+%h3= @article.title
+%ul.list-inline
+  %li.list-inline-item=link_to 'Back to List', admin_articles_path
+  %li.list-inline-item &nbsp;|&nbsp;
+  %li.list-inline-item=link_to 'Edit Article', edit_admin_article_path(@article)
+%hr
+.content=simple_format @article.content
 
-%h2 Comments
+%p=link_to "See comments", "#"
 
-%ul.list-unstyled
-  -@article.comments.each do |comment|
-    %li
-      %blockquote
-        %p=comment.body
-        %p=comment.name
-%br/
+/ %h2 Comments
+
+/ %ul.list-unstyled
+/   -@article.comments.each do |comment|
+/     %li
+/       %blockquote
+/         %p=comment.body
+/         %p=comment.name
+/ %br/

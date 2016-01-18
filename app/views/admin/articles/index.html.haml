@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 %p#notice= notice
 %h1 Listing Articles
 %table
@@ -24,3 +25,23 @@
         
 %br/
 = link_to 'New Article', new_admin_article_path
+=======
+.row
+  .col-md-12
+    %h3 Articles
+    %table.table.table-striped
+      %thead
+        %tr
+          %th Title
+          %th Content
+          %th{:colspan => "2"}
+      %tbody
+        - @articles.each do |article|
+          %tr
+            %td=link_to article.title, admin_article_path(article)
+            %td= article.content
+            %td= link_to 'Edit', edit_admin_article_path(article)
+            %td= link_to 'Destroy', admin_article_path(article), method: :delete, data: { confirm: 'Are you sure?' }
+    %br/
+    = link_to 'New Article', new_admin_article_path
+>>>>>>> e19e36e5992f0dc0768dc48eaef59c4679530d36

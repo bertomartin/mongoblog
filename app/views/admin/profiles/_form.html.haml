@@ -1,0 +1,12 @@
+= form_for(current_user.profile, as: :profile, url: admin_profile_path) do |f|
+  = render 'shared/error_messages', target: current_user.profile
+  .field
+    = f.label :first_name
+    %br/
+    = f.text_field :first_name
+  .field
+    = f.label :last_name
+    %br/
+    = f.text_field :last_name
+  .actions
+    = f.submit

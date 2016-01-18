@@ -1,0 +1,21 @@
+%nav.navbar.navbar-full.navbar-light.bg-faded.navbar-fixed-top
+  =link_to "MongoBlog Admin", admin_path, class: 'navbar-brand'
+  %ul.nav.navbar-nav
+    %li.nav-item.active
+      =link_to "Home", admin_path, class: 'nav-link'
+    %li.nav-item
+      =link_to "Articles", admin_articles_path, class: 'nav-link'
+    %li.nav-item
+      =link_to "Pages", admin_pages_path, class: 'nav-link'
+    %li.nav-item
+      %a.nav-link{:href => "#"} Comments
+    %li.nav-item
+      %a.nav-link{:href => "#"} Blog Details
+  .nav.navbar-nav.pull-xs-right
+    - if user_signed_in?
+      Welcome #{current_user.email}
+      \#{link_to "logout", destroy_user_session_path, method: 'DELETE'}
+    - else
+      = link_to "login", new_user_session_path
+      or
+      \#{link_to "signup", new_user_registration_path}

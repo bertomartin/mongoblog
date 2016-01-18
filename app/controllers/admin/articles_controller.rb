@@ -1,5 +1,4 @@
-class Admin::ArticlesController < ApplicationController
-  before_filter :authenticate_user!
+class Admin::ArticlesController < Admin::BaseController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   
   # GET /articles
@@ -57,12 +56,33 @@ class Admin::ArticlesController < ApplicationController
     end
   end
 
+<<<<<<< HEAD
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
     respond_to do |format|
       if @article.update(article_params)
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
+=======
+  def create
+    @article = Article.new(article_params)
+
+    respond_to do |format|
+      if @article.save
+        format.html { redirect_to [:admin, @article], notice: 'Article was successfully created.' }
+        format.json { render :show, status: :created, location: @article }
+      else
+        format.html { render :new }
+        format.json { render json: @article.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    respond_to do |format|
+      if @article.update(article_params)
+        format.html { redirect_to [:admin, @article], notice: 'Article was successfully updated.' }
+>>>>>>> e19e36e5992f0dc0768dc48eaef59c4679530d36
         format.json { render :show, status: :ok, location: @article }
       else
         format.html { render :edit }
@@ -76,7 +96,11 @@ class Admin::ArticlesController < ApplicationController
   def destroy
     @article.destroy
     respond_to do |format|
+<<<<<<< HEAD
       format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
+=======
+      format.html { redirect_to admin_articles_url, notice: 'Article was successfully destroyed.' }
+>>>>>>> e19e36e5992f0dc0768dc48eaef59c4679530d36
       format.json { head :no_content }
     end
   end
@@ -96,5 +120,10 @@ class Admin::ArticlesController < ApplicationController
         # @tag_list = Article.distinct(:tag)
         Article.all_in(tag: tag)
     end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def article_params
+    params.require(:article).permit(:title, :content, :published)
+  end
 
 end
