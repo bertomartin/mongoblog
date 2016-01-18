@@ -1,30 +1,32 @@
 class ArticlesController < ApplicationController
-  # before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_article, only: [:show, :edit, :update, :destroy]
 
-  # def tags(tag_list)
-  #     @article = Article.all
-      
-  #     list_of_non_existing_tags = Array.new
-
-  #     tag_list.each do |t|
-  #         tag_exist = false
-  #         @article.each do |article|
-  #             if t.downcase == article.tag
-  #                tag_exist = true
-  #             end
-  #         end
-  #         if !tag_exist
-  #           list_of_non_existing_tags.push(t)
-  #         end          
-  #     end
-  #     list_of_non_existing_tags
-  # end
 
   # # GET /articles
   # # GET /articles.json
   def index
-    @articles = Article.all
+    @tag_list = Article.distinct(:tag)
+    if params[:url]
+      @articles = Article.all_in(tag: params[:url])
+    else
+      @articles = Article.all
+    end
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @articles }
+    end
   end
+
+   def tag_articles
+     @tag_list = Article.distinct(:tag)
+     @tag = "Ruby"
+     if @tag_list.include? @tag
+        @art = Article.all_in(tag: [@tag])
+    else
+        redirect_to articles_path
+    end
+   end
 
   # # GET /articles/1
   # # GET /articles/1.json

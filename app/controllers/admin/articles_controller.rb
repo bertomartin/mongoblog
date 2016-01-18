@@ -1,33 +1,19 @@
 class Admin::ArticlesController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_article, only: [:show, :edit, :update, :destroy]
-
-  def tags(tag_list)
-      @article = Article.all
-      
-      list_of_non_existing_tags = Array.new
-
-      tag_list.each do |t|
-          tag_exist = false
-          @article.each do |article|
-            article[:tag].each do |a|
-              if t.downcase == a
-                 tag_exist = true
-              end
-            end
-          end
-          if !tag_exist
-            list_of_non_existing_tags.push(t)
-          end          
-      end
-      list_of_non_existing_tags
-  end
-
+  
   # GET /articles
   # GET /articles.json
-  def index
-    @articles = Article.all
+  def index         
+     @tag_list = Article.distinct(:tag)
 
+    if params[:url]
+      @articles = Article.all_in(tag: params[:url])
+    else
+      @articles = Article.all
+    end
+    
+    
      respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @articles }
@@ -36,7 +22,7 @@ class Admin::ArticlesController < ApplicationController
 
   # GET /articles/1
   # GET /articles/1.json
-  def show
+  def show    
     @comment = @article.comments.build
   end
 
@@ -57,19 +43,8 @@ class Admin::ArticlesController < ApplicationController
   # POST /articles
   # POST /articles.json
   def create
-    a = Array.new
     @article = Article.new(article_params)
-    input_tag = params[:article][:tag].split(',')
-    @article[:tag] = params[:article][:tag].split(',')
-    
-    tag_list = tags(input_tag)
-    if !tag_list.empty?
-      tag_list.each do |tag|
-       a.push(tag)
-      end
-      @article[:tag] = a
-    end
-    
+    @article[:tag] = params[:article][:tag].split(',').map{|item| item.strip}
 
     respond_to do |format|
       if @article.save
@@ -115,6 +90,11 @@ class Admin::ArticlesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
       params.require(:article).permit(:title, :content, :published, :tag=>[])
+    end
+
+    def get_articles_w_tag(tag)
+        # @tag_list = Article.distinct(:tag)
+        Article.all_in(tag: tag)
     end
 
 end

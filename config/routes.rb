@@ -2,8 +2,12 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :admin do
-    resources :articles
+    resources :articles  
   end
+  
+  # resources :tag do
+  #   resources :articles
+  # end
 
   resources :articles, only: [:show, :index] do
     resources :comments
