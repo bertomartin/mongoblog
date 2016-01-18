@@ -2,14 +2,11 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :admin do
-<<<<<<< HEAD
     resources :articles  
-=======
     get '', to: 'dashboard#index', as: '/'
     resources :articles
     resources :pages
     resource :profile
->>>>>>> e19e36e5992f0dc0768dc48eaef59c4679530d36
   end
   
   # resources :tag do

@@ -56,14 +56,18 @@ class Admin::ArticlesController < Admin::BaseController
     end
   end
 
-<<<<<<< HEAD
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
     respond_to do |format|
       if @article.update(article_params)
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
-=======
+      else
+        render 'edit'
+      end
+    end
+  end
+
   def create
     @article = Article.new(article_params)
 
@@ -82,7 +86,6 @@ class Admin::ArticlesController < Admin::BaseController
     respond_to do |format|
       if @article.update(article_params)
         format.html { redirect_to [:admin, @article], notice: 'Article was successfully updated.' }
->>>>>>> e19e36e5992f0dc0768dc48eaef59c4679530d36
         format.json { render :show, status: :ok, location: @article }
       else
         format.html { render :edit }
@@ -96,11 +99,8 @@ class Admin::ArticlesController < Admin::BaseController
   def destroy
     @article.destroy
     respond_to do |format|
-<<<<<<< HEAD
       format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
-=======
       format.html { redirect_to admin_articles_url, notice: 'Article was successfully destroyed.' }
->>>>>>> e19e36e5992f0dc0768dc48eaef59c4679530d36
       format.json { head :no_content }
     end
   end
@@ -115,15 +115,4 @@ class Admin::ArticlesController < Admin::BaseController
     def article_params
       params.require(:article).permit(:title, :content, :published, :tag=>[])
     end
-
-    def get_articles_w_tag(tag)
-        # @tag_list = Article.distinct(:tag)
-        Article.all_in(tag: tag)
-    end
-
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def article_params
-    params.require(:article).permit(:title, :content, :published)
-  end
-
 end
