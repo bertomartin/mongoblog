@@ -29,7 +29,7 @@ class Admin::ArticlesController < Admin::BaseController
   def new
     @article = Article.new
 
-      respond_to do |format|
+    respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @article }
     end
@@ -44,7 +44,7 @@ class Admin::ArticlesController < Admin::BaseController
   def create
     @article = Article.new(article_params)
     @article[:tag] = params[:article][:tag].split(',').map{|item| item.strip}
-
+    rails
     respond_to do |format|
       if @article.save
         format.html { redirect_to admin_articles_path, notice: 'Article was successfully created.' }
@@ -61,7 +61,7 @@ class Admin::ArticlesController < Admin::BaseController
   def update
     @article = Article.find(params[:id])
     @article[:tag] = params[:article][:tag].split(',').map{|item| item.strip}
-    
+
     respond_to do |format|
       if @article.update(article_params)
         format.html { redirect_to [:admin, @article], notice: 'Article was successfully updated.' }
@@ -76,10 +76,11 @@ class Admin::ArticlesController < Admin::BaseController
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
+    # @article = Article.find(params[:id])
     @article.destroy
     respond_to do |format|
-      format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
       format.html { redirect_to admin_articles_url, notice: 'Article was successfully destroyed.' }
+      # format.html { redirect_to admin_articles_url, notice: 'Article was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
