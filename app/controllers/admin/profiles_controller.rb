@@ -2,6 +2,7 @@ class Admin::ProfilesController < Admin::BaseController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
 
   def show
+    
   end
 
   def new

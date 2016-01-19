@@ -4,15 +4,10 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :articles  
     get '', to: 'dashboard#index', as: '/'
-    resources :articles
     resources :pages
     resource :profile
   end
   
-  # resources :tag do
-  #   resources :articles
-  # end
-
   resources :articles, only: [:show, :index] do
     resources :comments
   end

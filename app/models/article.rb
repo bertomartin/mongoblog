@@ -9,9 +9,11 @@ class Article
   field :title, type: String
   field :content, type: String  
   field :published, type: Boolean, default: false
-  
+
+
 
   embeds_many :comments
+
 
   # def self.tagged(name)
   # 	tag_list = self.all_in(tag: name)
