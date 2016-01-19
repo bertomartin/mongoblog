@@ -27,7 +27,7 @@ class Admin::ArticlesController < Admin::BaseController
 
   # GET /articles/new
   def new
-    @article = Article.new
+    @article = Article.new    
 
     respond_to do |format|
       format.html # new.html.erb
@@ -42,9 +42,10 @@ class Admin::ArticlesController < Admin::BaseController
   # POST /articles
   # POST /articles.json
   def create
-    @article = Article.new(article_params)
+    @user = User.find(current_user.id)
+    @article = @user.articles.new(article_params)
+    # @article.id = @user[:_id]
     @article[:tag] = params[:article][:tag].split(',').map{|item| item.strip}
-    rails
     respond_to do |format|
       if @article.save
         format.html { redirect_to admin_articles_path, notice: 'Article was successfully created.' }
