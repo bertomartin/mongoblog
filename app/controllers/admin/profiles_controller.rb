@@ -6,13 +6,14 @@ class Admin::ProfilesController < Admin::BaseController
   end
 
   def new
-    current_user.profile = {}
+    current_user.profile || current_user.profile = {}
   end
 
   def create
   end
 
   def edit
+
   end
 
   def update
@@ -37,7 +38,6 @@ class Admin::ProfilesController < Admin::BaseController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def profile_params
-    # byebug
     params.require(:profile).permit(:first_name, :last_name)
   end
 

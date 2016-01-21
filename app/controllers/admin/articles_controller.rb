@@ -44,8 +44,9 @@ class Admin::ArticlesController < Admin::BaseController
   def create
     @user = User.find(current_user.id)
     @article = @user.articles.new(article_params)
-    # @article.id = @user[:_id]
     @article[:tag] = params[:article][:tag].split(',').map{|item| item.strip}
+    @article["Created"] = Time.now
+    
     respond_to do |format|
       if @article.save
         format.html { redirect_to admin_articles_path, notice: 'Article was successfully created.' }

@@ -14,10 +14,6 @@ class Article
 
   embeds_many :comments
 
-
-  # def self.tagged(name)
-  # 	tag_list = self.all_in(tag: name)
-  # end 
   belongs_to :user
   resourcify
 end
