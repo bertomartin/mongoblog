@@ -61,17 +61,23 @@ class Admin::ArticlesController < Admin::BaseController
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
+    @user = User.find(current_user.id)
     @article = Article.find(params[:id])
     @article[:tag] = params[:article][:tag].split(',').map{|item| item.strip}
-
-    respond_to do |format|
-      if @article.update(article_params)
-        format.html { redirect_to [:admin, @article], notice: 'Article was successfully updated.' }
-        format.json { render :show, status: :ok, location: @article }
-      else
-        format.html { render :edit }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
+    if @article.user_id == @user.id
+      respond_to do |format|
+        
+          if @article.update(article_params)
+            format.html { redirect_to [:admin, @article], notice: 'Article was successfully updated.' }
+            format.json { render :show, status: :ok, location: @article }
+          else
+            format.html { render :edit }
+            format.json { render json: @article.errors, status: :unprocessable_entity }
+          end
+        end
+    else
+      # flash.now.alert = "You are not allow to edit in this user session"
+      redirect_to admin_articles_url, flash:{:alert=> "You are not allowed to edit in this user session"}
     end
   end
 

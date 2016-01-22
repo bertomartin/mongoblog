@@ -12,9 +12,8 @@
     %li.nav-item
       %a.nav-link{:href => "#"} Comments
     %li.nav-item
-      / %a.nav-link{:href => admin_blog_detail_path} Blog Details
-    %li.nav-item
-      %a.nav-link{:href => admin_profile_path} My Profile
+      %a.nav-link{:href => admin_blog_detail_index_url} Blog Details
+
   .nav.navbar-nav.pull-xs-right
     - if user_signed_in?
       Welcome #{current_user.email}

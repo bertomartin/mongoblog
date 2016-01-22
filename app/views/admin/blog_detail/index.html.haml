@@ -1,25 +1,6 @@
-%p
-%div 
-  %h2 
-.row
-  .col-md-8.col-md-offset-2
-    - @blog_detail.articles.each do |blog|
-    	%p= {'title': blog.title, 'tags': blog.tag, 'summary': blog.content[0..6]} 
+%h1 Blog Details
 
-      / %h3=blog.article.title
-      / .content=article.content
-      / .read-more=link_to 'read more', article
-      / %hr
-/ =begin
-
-/ Blog details will hold:
-/    -blog titles/articles
-/    -Blog Author
-/    -Blurb (Number of character - TBD)
-/    -Social links (twitter, github, fb, google)
-/    -Tags
-/    -Created by Date
-/    -
-
-  
-/ end
+%span
+  - @blog_details.each do |blog|
+    %p= blog.title
+    

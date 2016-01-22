@@ -18,6 +18,7 @@ devise_for :users, path: 'admin', :controllers => { :sessions => "admin/sessions
   # resources :pages, only: [:show]
   get ':id', to: 'pages#show', as: :page
 
+  get "admin/blog_detail/index"
   #
   # Static pages
   #
