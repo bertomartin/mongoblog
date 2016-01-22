@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  devise_for :users, path: 'admin', :controllers => { :sessions => "admin/sessions" }
+  devise_for :users, path: 'admin', :controllers => { :sessions => "admin/sessions", :registrations => "admin/registrations" }
+
 
   namespace :admin do
     get '', to: 'dashboard#index', as: '/'

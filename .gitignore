@@ -12,3 +12,6 @@
 !/log/.keep
 /tmp
 .byebug_history
+app/views/.DS_Store
+app/views/admin/.DS_Store
+app/views/devise/.DS_Store
