@@ -1,11 +1,7 @@
 Rails.application.routes.draw do
 
-<<<<<<< HEAD
-  devise_for :users, path: 'admin', :controllers => { :sessions => "admin/sessions" }
-=======
-  devise_for :users, path: 'admin', :controllers => { :sessions => "admin/sessions", :registrations => "admin/registrations" }
+devise_for :users, path: 'admin', :controllers => { :sessions => "admin/sessions", :registrations => "admin/registrations" }
 
->>>>>>> f439a9e2472cba0decf89ddaa535c1fbf18c4cbb
 
   namespace :admin do
     resources :articles  
