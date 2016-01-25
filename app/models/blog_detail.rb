@@ -7,9 +7,8 @@ class BlogDetail
 
   field :author, type: String
   field :social_accounts, type: Array, default: []
-  # field :links, type: Array, default: []
   field :blog_title, type: String
   field :blurb, type: String
-  field :topics, type: Array
+  field :topics, type: Array, default: []
 
 end

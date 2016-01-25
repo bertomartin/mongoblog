@@ -1,0 +1,11 @@
+%p#notice= notice
+
+%h1 Blog Details
+
+%span
+  %p= @blog_details.author
+  %p= @blog_details.topics
+  %p= @blog_details.blurb
+  %p= @blog_details.blog_title
+
+  =link_to "Back", admin_blog_details_path

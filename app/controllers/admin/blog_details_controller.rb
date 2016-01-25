@@ -1,4 +1,5 @@
 class Admin::BlogDetailsController < Admin::BaseController
+	before_action :set_article, only: [:show, :edit, :update]
 	def index
 		@blog_details = BlogDetail.all
 
@@ -9,29 +10,46 @@ class Admin::BlogDetailsController < Admin::BaseController
 	end
 
 	def show    
-    	# @comment = @article.comments.build
+      @blog_details = BlogDetail.find(params[:id])
   	end
 
 	def new
 		@blog_details = BlogDetail.new
 	end
 
-
+	def edit
+		@blog_details = BlogDetail.find(params[:id])
+	end
 	
 	def create
 		@blog_details = BlogDetail.new(blog_params)
 		@blog_details[:topics] = [@blog_details[:blog_title]]
-		byebug
 		respond_to do |format|
 	      if @blog_details.save
-	        format.html { redirect_to 'admin_articles_path', notice: 'Blog details were added.' }
-	        # format.json { render :show, status: :created, location: [:admin,@blog_details] }
+	        format.html { redirect_to admin_blog_details_path, notice: 'Blog details were added.' }
+	        format.json { render :show, status: :created, location: [:admin,@blog_details] }
 	      else
 	        format.html { render :new }
 	        format.json { render json: @blog_details.errors, status: :unprocessable_entity }
 	      end
     	end
 	end
+
+	def update
+		@blog_details = BlogDetail.find(params[:id])
+		respond_to do |format|       
+	      if @blog_details.update(blog_params)
+	      	flash[:notice]= 'Blog details were successfully updated.'
+	      	format.html {redirect_to [:admin, @blog_details]}
+	        # format.html { redirect_to [:admin, @blog_details], notice: 'Blog details were successfully updated.' }
+	        format.json { render :show, status: :ok, location: @blog_details }
+	      else
+	        format.html { render :edit }
+	        format.json { render json: @blog_details.errors, status: :unprocessable_entity }
+	      end
+	    end
+	end
+
 
 	private
 	    # Use callbacks to share common setup or constraints between actions.
