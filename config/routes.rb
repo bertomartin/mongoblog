@@ -8,7 +8,7 @@ devise_for :users, path: 'admin', :controllers => { :sessions => "admin/sessions
     get '', to: 'dashboard#index', as: '/'
     resources :pages
     resource :profile
-    # resource :blog_detail
+    resources :blog_details
   end
   
   resources :articles, only: [:show, :index] do
@@ -18,7 +18,7 @@ devise_for :users, path: 'admin', :controllers => { :sessions => "admin/sessions
   # resources :pages, only: [:show]
   get ':id', to: 'pages#show', as: :page
 
-  get "admin/blog_detail/index"
+  # get "admin/blog_detail/index"
   #
   # Static pages
   #

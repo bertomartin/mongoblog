@@ -1,0 +1,25 @@
+= form_for([:admin,@blog_details]) do |f|
+  = render 'shared/error_messages', target: @blog_details
+  .field
+    = f.label :author
+    %br/
+    = f.text_field :author
+    .field
+    = f.label :social_accounts
+    %br/
+    = f.text_field :social_accounts
+  .field
+    = f.label :blog_title
+    %br/
+    = f.text_field :blog_title
+    %br/
+  .field
+    = f.label :topics
+    %br/    
+    = f.text_field  :topics
+  .field
+    = f.label :blurb
+    %br/
+    = f.text_area :blurb
+  .actions
+    = f.submit

@@ -1,0 +1,9 @@
+%h1 Blog Details
+
+%span
+  - @blog_details.each do |blog|
+    %p= blog.author
+    %p= blog.topics
+    %p= blog.blurb
+    %p= blog.blog_title
+    
