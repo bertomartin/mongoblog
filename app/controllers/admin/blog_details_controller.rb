@@ -2,6 +2,11 @@ class Admin::BlogDetailsController < Admin::BaseController
 	before_action :set_article, only: [:show, :edit, :update]
 	def index
 		@blog_details = BlogDetail.all
+		@create_details = ""
+		user = User.find(current_user.id)
+		if user.sign_in_count < 1 && @blog_details.empty?
+			@create_details = 'New'
+		end
 
 		respond_to do |format|
 	      format.html # index.html.erb
@@ -48,6 +53,16 @@ class Admin::BlogDetailsController < Admin::BaseController
 	        format.json { render json: @blog_details.errors, status: :unprocessable_entity }
 	      end
 	    end
+	end
+
+	def destroy
+		@blog_details = BlogDetail.find(params[:id])
+		@blog_details.destroy
+	    respond_to do |format|
+	      format.html { redirect_to admin_blog_details_path, notice: "Blogs details for #{@blog_details.author} was successfully deleted." }
+	      # format.html { redirect_to admin_articles_url, notice: 'Article was successfully destroyed.' }
+	      format.json { head :no_content }
+    	end
 	end
 
 

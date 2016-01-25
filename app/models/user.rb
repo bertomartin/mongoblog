@@ -29,6 +29,7 @@ class User
   has_many :articles
   embeds_one :profile
 
+
   ## Confirmable
   # field :confirmation_token,   type: String
   # field :confirmed_at,         type: Time

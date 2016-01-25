@@ -1,3 +1,4 @@
+%p#notice= notice
 %h1 Blog Details
 
 %span
@@ -8,5 +9,8 @@
     %p= blog.blog_title
     %p= blog
     =link_to "Update", edit_admin_blog_detail_path(blog)
+    =link_to "Delete", admin_blog_detail_path(blog), method: :delete, data: { confirm: 'Are you sure?' } 
 
+%span
+  =link_to @create_details, new_admin_blog_detail_path
     
