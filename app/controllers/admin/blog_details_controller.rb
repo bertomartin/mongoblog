@@ -4,7 +4,7 @@ class Admin::BlogDetailsController < Admin::BaseController
 		@blog_details = BlogDetail.all
 		@create_details = ""
 		user = User.find(current_user.id)
-		if user.sign_in_count < 1 && @blog_details.empty?
+		if @blog_details.empty?
 			@create_details = 'New'
 		end
 
@@ -44,7 +44,7 @@ class Admin::BlogDetailsController < Admin::BaseController
 		@blog_details = BlogDetail.find(params[:id])
 		respond_to do |format|       
 	      if @blog_details.update(blog_params)
-	      	flash[:notice]= 'Blog details were successfully updated.'
+	      	flash[:notice]= "Blog details for #{@blog_details.author} were successfully updated."
 	      	format.html {redirect_to [:admin, @blog_details]}
 	        # format.html { redirect_to [:admin, @blog_details], notice: 'Blog details were successfully updated.' }
 	        format.json { render :show, status: :ok, location: @blog_details }

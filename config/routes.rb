@@ -18,11 +18,9 @@ devise_for :users, path: 'admin', :controllers => { :sessions => "admin/sessions
   # resources :pages, only: [:show]
   get ':id', to: 'pages#show', as: :page
 
-  # get "admin/blog_detail/index"
-  #
   # Static pages
   #
-  # get ':action', :controller => 'pages', :as => 'page'
+ resources :user_subscription
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

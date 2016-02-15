@@ -5,6 +5,7 @@ class Comment
   field :name, type: String
   field :body, type: String
   field :published, type: Boolean, default: true
+  field :subscribe, type: String
 
   embedded_in :article, inverse_of: :comments
 end

@@ -49,7 +49,7 @@ gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
 gem 'mongoid-slug'
 gem 'cancancan'
 gem 'rolify'
-
+gem 'mandrill-api'
 # google
 # these gems will be used to connect to google and bring back the analytics produced by Google Analytics
 # gem 'google-api-client', '0.9.pre5'
@@ -60,3 +60,5 @@ gem 'googleauth', '0.4.2'
 
 # google analytics helpers
 gem 'google-analytics-rails', '1.0.0'
+gem 'gibbon', github: "amro/gibbon"
+gem 'sucker_punch', '~> 1.0'

@@ -15,3 +15,8 @@
 app/views/.DS_Store
 app/views/admin/.DS_Store
 app/views/devise/.DS_Store
+
+# Ignore all config files
+config/amazon_s3.yml
+config/database.yml
+config/secrets.yml

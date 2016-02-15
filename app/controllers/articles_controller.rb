@@ -12,9 +12,22 @@ class ArticlesController < ApplicationController
       @articles = Article.all
     end
 
+    @user_subscription = UserSubscription.new
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @articles }
+      if params[:email]
+        email = params[:email]
+        if UserSubscription.find(:first, :email=>params[:email])            
+            format.html{redirect_to articles_path, notice: "#{email} is already in database" } # index.html.erb
+            format.json { render json: @articles }          
+        else
+          @user_subscription= UserSubscription.create(:email=> params[:email])
+          format.html{redirect_to articles_path, notice: "#{email} has been added." } # index.html.erb
+          format.json { render json: @articles }
+        end      
+      else
+        format.html # index.html.erb
+        format.json { render json: @articles }
+      end          
     end
   end
 
@@ -84,7 +97,7 @@ class ArticlesController < ApplicationController
     end
   end
 
-  # private
+  private
   #   # Use callbacks to share common setup or constraints between actions.
     def set_article
       @article = Article.find(params[:id])
