@@ -1,8 +1,5 @@
 class Admin::ArticlesController < Admin::BaseController
   
-  require 'mandrill'
-  mandrill = Mandrill::API.new 'YOUR_API_KEY'
-
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   
   # GET /articles
@@ -14,10 +11,9 @@ class Admin::ArticlesController < Admin::BaseController
       @articles = Article.all_in(tag: params[:url])
     else
       @articles = Article.all
-    end
+    end    
     
-    
-     respond_to do |format|
+    respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @articles }
     end

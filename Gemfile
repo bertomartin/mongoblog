@@ -62,3 +62,4 @@ gem 'googleauth', '0.4.2'
 gem 'google-analytics-rails', '1.0.0'
 gem 'gibbon', github: "amro/gibbon"
 gem 'sucker_punch', '~> 1.0'
+gem 'mailchimp-api', require: 'mailchimp'

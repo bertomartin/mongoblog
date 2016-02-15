@@ -1,5 +1,7 @@
+require 'mailchimp'
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+
 
 
   # # GET /articles
@@ -12,15 +14,23 @@ class ArticlesController < ApplicationController
       @articles = Article.all
     end
 
+    #TODO Check for valid email. Add email confirmation to ensure valid emails are added.
     @user_subscription = UserSubscription.new
     respond_to do |format|
       if params[:email]
+        user_info = UserSubscription.find_by(:email=>params[:email]) 
         email = params[:email]
-        if UserSubscription.find(:first, :email=>params[:email])            
+        
+        if user_info            
             format.html{redirect_to articles_path, notice: "#{email} is already in database" } # index.html.erb
             format.json { render json: @articles }          
         else
           @user_subscription= UserSubscription.create(:email=> params[:email])
+          
+          #TODO: Use environment variables instead of teh api-keys
+          mailchimp = Mailchimp::API.new("7bd32c202b6d488139ab7701ddf9eb4e-us12")
+          mailchimp.lists.subscribe("29d01cb703", {"email" => email})
+
           format.html{redirect_to articles_path, notice: "#{email} has been added." } # index.html.erb
           format.json { render json: @articles }
         end      
@@ -30,16 +40,6 @@ class ArticlesController < ApplicationController
       end          
     end
   end
-
-   # def tag_articles
-   #   @tag_list = Article.distinct(:tag)
-   #   @tag = "Ruby"
-   #   if @tag_list.include? @tag
-   #      @art = Article.all_in(tag: [@tag])
-   #  else
-   #      redirect_to articles_path
-   #  end
-   # end
 
   # # GET /articles/1
   # # GET /articles/1.json
