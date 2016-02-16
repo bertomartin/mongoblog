@@ -27,9 +27,12 @@ class ArticlesController < ApplicationController
         else
           @user_subscription= UserSubscription.create(:email=> params[:email])
           
+          mailchimp_api_key = Rails.application.secrets.mailchimp_api_key
+          list_id = Rails.application.secrets.list_id
+          
           #TODO: Use environment variables instead of teh api-keys
-          mailchimp = Mailchimp::API.new("7bd32c202b6d488139ab7701ddf9eb4e-us12")
-          mailchimp.lists.subscribe("29d01cb703", {"email" => email})
+          mailchimp = Mailchimp::API.new(mailchimp_api_key)
+          mailchimp.lists.subscribe(list_id, {"email" => email})
 
           format.html{redirect_to articles_path, notice: "#{email} has been added." } # index.html.erb
           format.json { render json: @articles }
