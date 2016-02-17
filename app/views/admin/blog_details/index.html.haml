@@ -12,4 +12,9 @@
 
 %span
   =link_to @create_details, new_admin_blog_detail_path
+
+%p
+/ =form_tag 'admin_blog_details', :onclick => remote_function(:controller => :blog_detail, :action => :index) # method: :get do 
+/   =submit_tag 'Export to JSON' 
     
+= button_to "Export to JSON", url_for(:action => 'export_to_json', :controller=> :blog_details)

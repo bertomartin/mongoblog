@@ -1,12 +1,13 @@
 class Admin::BlogDetailsController < Admin::BaseController
 	before_action :set_article, only: [:show, :edit, :update]
+
 	def index
 		@blog_details = BlogDetail.all
 		@create_details = ""
 		user = User.find(current_user.id)
 		if @blog_details.empty?
 			@create_details = 'New'
-		end
+		end		
 
 		respond_to do |format|
 	      format.html # index.html.erb
@@ -63,6 +64,13 @@ class Admin::BlogDetailsController < Admin::BaseController
 	      # format.html { redirect_to admin_articles_url, notice: 'Article was successfully destroyed.' }
 	      format.json { head :no_content }
     	end
+	end
+
+	def export_to_json
+		export_to_json = "mongoexport --db mongoblog_development --collection articles --out articles.json"
+		system(export_to_json)
+	    redirect_to admin_blog_details_path, notice: "Export has started..." 
+	    # format.html { redirect_to admin_articles_url, notice: 'Article was successfully destroyed.' }
 	end
 
 

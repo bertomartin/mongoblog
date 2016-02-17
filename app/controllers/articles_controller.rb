@@ -14,10 +14,10 @@ class ArticlesController < ApplicationController
       @articles = Article.all
     end
 
-    #TODO Check for valid email. Add email confirmation to ensure valid emails are added.
     @user_subscription = UserSubscription.new
+    #TODO Check for valid email. Add email confirmation to ensure valid emails are added.    
     respond_to do |format|
-      if params[:email]
+      if !params[:email].blank?        
         user_info = UserSubscription.find_by(:email=>params[:email]) 
         email = params[:email]
         
@@ -29,8 +29,7 @@ class ArticlesController < ApplicationController
           
           mailchimp_api_key = Rails.application.secrets.mailchimp_api_key
           list_id = Rails.application.secrets.list_id
-          
-          #TODO: Use environment variables instead of teh api-keys
+
           mailchimp = Mailchimp::API.new(mailchimp_api_key)
           mailchimp.lists.subscribe(list_id, {"email" => email})
 

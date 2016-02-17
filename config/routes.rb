@@ -8,12 +8,16 @@ devise_for :users, path: 'admin', :controllers => { :sessions => "admin/sessions
     get '', to: 'dashboard#index', as: '/'
     resources :pages
     resource :profile
-    resources :blog_details
+    resources :blog_details do
+      post 'export_to_json', :on => :collection
+    end
   end
   
   resources :articles, only: [:show, :index] do
     resources :comments
   end
+
+
 
   # resources :pages, only: [:show]
   get ':id', to: 'pages#show', as: :page
