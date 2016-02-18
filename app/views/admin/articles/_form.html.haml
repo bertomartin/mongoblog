@@ -2,6 +2,10 @@
   = render 'shared/error_messages', target: @article
   
   .field
+    = f.label :authors
+    %br/
+    = f.text_field :authors
+  .field
     = f.label :title
     %br/
     = f.text_field :title

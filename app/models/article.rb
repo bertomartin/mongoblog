@@ -3,7 +3,9 @@ class Article
   include Mongoid::Slug
   slug :title
 
-  validates_presence_of :title, :content
+  validates_presence_of :title, :content, :authors
+
+  field :authors, type: Array, default: []
 
   field :tag, type: Array, default: []
   field :title, type: String

@@ -69,7 +69,7 @@ class Admin::BlogDetailsController < Admin::BaseController
 	def export_to_json
 		export_to_json = "mongoexport --db mongoblog_development --collection articles --out articles.json"
 		system(export_to_json)
-	    redirect_to admin_blog_details_path, notice: "Export has started..." 
+	    redirect_to admin_blog_details_path, notice: "Export Completed" 
 	    # format.html { redirect_to admin_articles_url, notice: 'Article was successfully destroyed.' }
 	end
 

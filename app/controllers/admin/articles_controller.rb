@@ -45,7 +45,10 @@ class Admin::ArticlesController < Admin::BaseController
     @user = User.find(current_user.id)
     @article = @user.articles.new(article_params)
     @article[:tag] = params[:article][:tag].split(',').map{|item| item.strip}
-    @article["Created"] = Time.now
+    @article[:authors] = params[:article][:authors].split(',')
+    
+    time = Time.new
+    @article[:created_at] = time.strftime("%m/%d/%Y")
     
     respond_to do |format|
       if @article.save

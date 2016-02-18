@@ -61,8 +61,8 @@ class ArticlesController < ApplicationController
   # # POST /articles
   # # POST /articles.json
   def create    
-    @article = Article.new(article_params)
-    @article[:tag] = params[:article][:tag].split(',')   
+    @article = Article.new(article_params)    
+    @article[:tag] = params[:article][:tag].split(',')    
 
     respond_to do |format|
       if @article.save
@@ -107,6 +107,6 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :content, :published, :tag=>[])
+      params.require(:article).permit(:title, :content, :published, :tag=>[], :authors=>[])
     end
 end
