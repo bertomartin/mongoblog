@@ -48,7 +48,7 @@ class Admin::ArticlesController < Admin::BaseController
     @article[:authors] = params[:article][:authors].split(',')
     
     time = Time.new
-    @article[:created_at] = time.strftime("%m/%d/%Y")
+    @article[:created_at] = time.strftime("%a, %m/%d/%Y")
     
     respond_to do |format|
       if @article.save

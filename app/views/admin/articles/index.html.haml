@@ -11,7 +11,6 @@
 - @tag_list.each do |tag|
   =link_to tag + " ", url: tag
 =link_to 'All', admin_articles_path
-     
 %p
 %div 
   %h2 
@@ -19,7 +18,25 @@
   .col-md-8.col-md-offset-2
     - @articles.each do |article|
       %h3=article.title
+      <span>
+      %em="By "      
+      - length = article.authors.length
+      - names = "" 
+      - if length == 1
+        %em=article.authors[0]
+        %em=article['created_at']
+      - if length == 2
+        %em=article.authors[0] + " & " + article.authors[1] 
+        %em=article['created_at']
+      -if length > 2
+        -art=""
+        -for i in 1..length-2
+          -art = art + " , " + article.authors[i]
+          -names=article.authors[0] + art + " & " + article.authors[length-1]
+        %em=names
 
+        %em=article['created_at']
+      </span>
       .content=article.content
       .read-more=link_to 'read more', article
       %tr
