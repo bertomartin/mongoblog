@@ -19,7 +19,9 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
+        
         CommentMailer.notify_on_comment(@user).deliver
+
         format.html {redirect_to @article, notice: 'Comment was successfully created.'}
       else
         format.html { redirect_to @article }

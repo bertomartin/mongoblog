@@ -12,4 +12,7 @@ class CommentMailer < ApplicationMailer
                       :text    => 'This mail is sent using Mailgun API via mailgun-ruby'}
     mg_client.send_message Rails.application.secrets.test_domain, message_params
   end
+
+  def notify_weekly(user)
+  end
 end
