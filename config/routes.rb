@@ -4,7 +4,10 @@ devise_for :users, path: 'admin', :controllers => { :sessions => "admin/sessions
 
 
   namespace :admin do
-    resources :articles  
+    resources :articles do
+      resources :comments
+    end 
+    
     get '', to: 'dashboard#index', as: '/'
     resources :pages
     resource :profile

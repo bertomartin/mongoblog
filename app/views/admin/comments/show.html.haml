@@ -1,0 +1,20 @@
+.row
+  .col-md-8.col-md-offset-2
+    %h3= @article.title
+    .content=@article.content
+
+    %hr
+
+    %h2 Comments
+
+    %ul.list-unstyled
+      -@article.comments.each do |comment|
+        %li
+          %blockquote.blockquote
+            %p.m-b-0=comment.body
+            %footer.blockquote-footer
+              =comment.name
+              =comment.id
+              /# %em=time_ago_in_words comment.id.generation_time
+              =link_to [comment.article, comment.id], controller: 'comments', :action=>'show'
+    %br/

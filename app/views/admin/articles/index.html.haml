@@ -38,7 +38,7 @@
         %em=article['created_at']
       </span>
       .content=article.content
-      .read-more=link_to 'read more', article
+      .read-more=link_to 'read more', admin_article_path(article)
       %tr
         / %td= link_to 'Show', admin_article_path(article)
         %td= link_to 'Edit', edit_admin_article_path(article)
