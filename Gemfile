@@ -63,3 +63,4 @@ gem 'google-analytics-rails', '1.0.0'
 gem 'gibbon', github: "amro/gibbon"
 gem 'sucker_punch', '~> 1.0'
 gem 'mailchimp-api', require: 'mailchimp'
+gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
