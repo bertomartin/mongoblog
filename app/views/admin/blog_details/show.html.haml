@@ -4,7 +4,11 @@
 
 %span
   %p= @blog_details.author
-  %p= @blog_details.topics
+  -social_accounts=@blog_details.social_accounts.join(", ")
+  %p=social_accounts
+
+  -topics = @blog_details.topics.join(", ")
+  %p=topics
   %p= @blog_details.blurb
   %p= @blog_details.blog_title
 

@@ -29,7 +29,8 @@ class Admin::BlogDetailsController < Admin::BaseController
 	
 	def create
 		@blog_details = BlogDetail.new(blog_params)
-		@blog_details[:topics] = [@blog_details[:blog_title]]
+		@blog_details[:topics] = params[:blog_detail][:topics].split(",").map{|item| item.strip}
+		@blog_details[:social_accounts] = params[:blog_detail][:social_accounts].split(",").map{|item| item.strip}
 		respond_to do |format|
 	      if @blog_details.save
 	        format.html { redirect_to admin_blog_details_path, notice: 'Blog details were added.' }
