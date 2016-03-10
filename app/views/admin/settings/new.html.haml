@@ -1,0 +1,14 @@
+%p#notice= notice
+=render 'shared/admin_nav'
+%h1="In Settings"
+
+-comment_settings = [{'how_to_email'=>'email_weekly', 'settings'=>'send email summary weekly'}, {'how_to_email'=>'email_when_comment', 'settings'=>'send email when comment'}]
+
+=form_tag :action=>"create", :controller=>"admin/settings" do 
+  = label_tag "send email when comment"      
+  =radio_button :settings, :how_to_email, :email_when_comment, checked: true
+  %p
+  = label_tag "'send email summary weekly'"
+  =radio_button :settings, :how_to_email, :email_weekly, checked: false
+  
+  =submit_tag "Save"

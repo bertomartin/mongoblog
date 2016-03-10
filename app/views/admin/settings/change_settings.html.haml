@@ -1,0 +1,25 @@
+%p#notice= notice
+=render 'shared/admin_nav'
+%h1="In Settings"
+
+-comment_settings = [{'how_to'=>'email_weekly', 'settings'=>'send email summary weekly'}, {'how_to'=>'email_when_comment', 'settings'=>'send email when comment'}]
+
+=form_tag :action=>"change_settings", :controller=>"admin/settings", method: :patch do 
+  
+  -comment_settings.each do |settings|
+    -if !@settings.blank?
+      -if @settings == settings['how_to']
+        =radio_button :settings, :how_to_email, @settings, checked: true
+        %p
+      -else
+        = label_tag settings['settings']
+        =radio_button :settings, :how_to_email, settings['how_to']
+        %p
+    -else
+      = label_tag settings['settings']
+      =radio_button :settings, :how_to_email, settings['how_to']
+  
+  =submit_tag "Save"
+
+
+

@@ -14,6 +14,13 @@ devise_for :users, path: 'admin', :controllers => { :sessions => "admin/sessions
     resources :blog_details do
       post 'export_to_json', :on => :collection
     end
+
+    resources :settings 
+    # do 
+    #   post "settings/:id", to: "settings#update", as: :settings
+    # end
+    post "settings/:id", to: "settings#update", as: :change_settings
+    post "settings/:id/edit", to: "settings#edit"
   end
   
   resources :articles, only: [:show, :index] do
@@ -21,10 +28,10 @@ devise_for :users, path: 'admin', :controllers => { :sessions => "admin/sessions
   end
 
 
-
   # resources :pages, only: [:show]
+  # get ':id', to: 'pages#show', as: :page
+  # resources :pages, :path => 'about'
   get ':id', to: 'pages#show', as: :page
-
   # Static pages
   #
  resources :user_subscription

@@ -28,7 +28,7 @@ class User
   # Relationships
   has_many :articles
   embeds_one :profile
-
+  has_many :setting
 
   ## Confirmable
   # field :confirmation_token,   type: String
