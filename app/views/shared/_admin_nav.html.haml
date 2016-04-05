@@ -13,7 +13,8 @@
       %a.nav-link{:href => "#"} Comments
     %li.nav-item
       %a.nav-link{:href => admin_blog_details_path} Blog Details
-
+    %li.nav-item
+      =link_to "Settings", admin_settings_path, :controller=>'settings', class: 'nav-link'
   .nav.navbar-nav.pull-xs-right
     - if user_signed_in?
       Welcome #{current_user.email}

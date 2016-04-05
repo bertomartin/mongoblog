@@ -1,8 +1,7 @@
 require 'mailchimp'
+
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
-
-
 
   # # GET /articles
   # # GET /articles.json
@@ -17,7 +16,10 @@ class ArticlesController < ApplicationController
     @user_subscription = UserSubscription.new
     #TODO Check for valid email. Add email confirmation to ensure valid emails are added.    
     respond_to do |format|
-      if !params[:email].blank?        
+      if params[:email].blank?
+        format.html # index.html.erb
+        format.json { render json: @articles }
+      else
         user_info = UserSubscription.find_by(:email=>params[:email]) 
         email = params[:email]
         
@@ -25,8 +27,8 @@ class ArticlesController < ApplicationController
             format.html{redirect_to articles_path, notice: "#{email} is already in database" } # index.html.erb
             format.json { render json: @articles }          
         else
-          @user_subscription= UserSubscription.create(:email=> params[:email])
-          
+          #Send email when a user subscribe
+          @user_subscription= UserSubscription.create(:email=> params[:email])          
           mailchimp_api_key = Rails.application.secrets.mailchimp_api_key
           list_id = Rails.application.secrets.list_id
 
@@ -35,10 +37,7 @@ class ArticlesController < ApplicationController
 
           format.html{redirect_to articles_path, notice: "#{email} has been added." } # index.html.erb
           format.json { render json: @articles }
-        end      
-      else
-        format.html # index.html.erb
-        format.json { render json: @articles }
+        end
       end          
     end
   end
@@ -47,6 +46,10 @@ class ArticlesController < ApplicationController
   # # GET /articles/1.json
   def show
     @comment = @article.comments.build
+
+    client = Mongo::Client.new([ 'localhost' ], :database => 'mongoblog_development')
+    articles = client[:articles]
+    articles.find("_id"=>@article.id).update_one("$inc" => { :view_count => 1 })
   end
 
   # # GET /articles/new
@@ -107,6 +110,6 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :content, :published, :tag=>[], :authors=>[])
+      params.require(:article).permit(:title, :content, :published, :tag=>[], :authors=>[], :view_count=>0)
     end
 end

@@ -11,7 +11,7 @@ class Article
   field :title, type: String
   field :content, type: String  
   field :published, type: Boolean, default: false
-
+  field :view_count, type: Integer, default: 0
 
 
   embeds_many :comments

@@ -16,15 +16,19 @@ class CommentsController < ApplicationController
   def create
     @comment = @article.comments.build(comment_params)
     @user = User.find(current_user.id)
-
-    respond_to do |format|
-      if @comment.save
-        
-        CommentMailer.notify_on_comment(@user).deliver
-
-        format.html {redirect_to @article, notice: 'Comment was successfully created.'}
-      else
-        format.html { redirect_to @article }
+    settings = @user.setting
+    
+    if settings[0]['how_to_email'] == 'email_weekly'
+      #do something
+    else
+      respond_to do |format|
+        if @comment.save
+          CommentMailer.notify_on_comment(@user, @article).deliver
+          
+          format.html {redirect_to @article, notice: 'Comment was successfully created.'}
+        else
+          format.html { redirect_to @article }
+        end
       end
     end
   end

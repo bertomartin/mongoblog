@@ -3,16 +3,22 @@ require 'mailgun'
 class CommentMailer < ApplicationMailer
 	 default from: Rails.application.secrets.emailer
 
-  def notify_on_comment(user)
+  def notify_on_comment(user, article)
     @user = user
     mg_client = Mailgun::Client.new Rails.application.secrets.mailgun_api_key
     message_params = {:from    => Rails.application.secrets.emailer,
                       :to      => @user.email,
-                      :subject => 'Sample Mail using Mailgun API',
-                      :text    => 'This mail is sent using Mailgun API via mailgun-ruby'}
+                      :subject => "Comment posted on #{article['title']}",
+                      :text    => "A comment was posted on #{article['title']} by #{article['authors']}"}
     mg_client.send_message Rails.application.secrets.test_domain, message_params
   end
 
   def notify_weekly(user)
+  end
+
+  def send_newsletter
+  end
+
+  def sign_up(user)
   end
 end

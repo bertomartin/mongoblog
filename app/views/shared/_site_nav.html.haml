@@ -4,6 +4,6 @@
     %li.nav-item.active
       =link_to 'Articles', articles_path, class: 'nav-link'
     %li.nav-item
-      =link_to 'About Me', page_path("about"), class: 'nav-link'
+      =link_to 'About Me', page_path('about'), controller: 'pages', :action=>'show', class: 'nav-link'
   .pull-xs-right
     facebook, tw, instagram

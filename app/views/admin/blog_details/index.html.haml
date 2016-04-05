@@ -4,12 +4,12 @@
 %span
   - @blog_details.each do |blog|
     %p= blog.author
-    -social_accounts = blog.social_accounts
+    -social_accounts = blog.social_accounts.join(", ")
     %p=social_accounts
 
     -topics = blog.topics.join(", ")
     %p= topics#blog.topics
-    
+
     %p= blog.blurb
     %p= blog.blog_title
     =link_to "Update", edit_admin_blog_detail_path(blog)
