@@ -4,8 +4,9 @@ class Admin::ArticlesController < Admin::BaseController
   
   # GET /articles
   # GET /articles.json
-  def index         
-     @tag_list = Article.distinct(:tag)
+  def index    
+    @top_articles = Article.order_by(view_count: :desc)     
+    @tag_list = Article.distinct(:tag)
 
     if params[:url]
       @articles = Article.all_in(tag: params[:url])

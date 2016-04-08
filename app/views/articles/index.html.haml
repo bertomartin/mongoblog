@@ -1,7 +1,25 @@
 %p#notice= notice
 %h1 Listing Articles
-%h3 TAGS
+%h2 Top Articles
 
+%p
+%div 
+  %h2 
+.row
+  .col-md-12.col-md-offset-1
+    -rank =  @top_articles.length
+    -if rank > 10
+      -rank = 10
+    %span
+      -for i in 0..rank-1      
+        =link_to @top_articles[i].title, @top_articles[i]       
+%p
+<br>
+<br>
+<br>
+<br>
+
+%h3 TAGS
 %span
   - @tag_list.each do |tag|
     =link_to tag + " ", url: tag

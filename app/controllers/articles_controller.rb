@@ -6,7 +6,10 @@ class ArticlesController < ApplicationController
   # # GET /articles
   # # GET /articles.json
   def index
+    @top_articles = Article.order_by(view_count: :desc)    
+    
     @tag_list = Article.distinct(:tag)
+
     if params[:url]
       @articles = Article.all_in(tag: params[:url])
     else
