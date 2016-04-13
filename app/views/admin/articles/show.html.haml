@@ -35,15 +35,13 @@
             /# %em=time_ago_in_words comment.id.generation_time
             -if note.notes_info
               =link_to 'delete', admin_article_note_path(note.article.id, note.id), controller: 'notes', method: :delete, data: {confirm: 'Are you sure?' } 
-    %br/
-    
+    %br/    
 
 
     /Add Notes
     =button_to "Add Notes", new_admin_article_note_path(@article), method: :get
     
-
-
+    
     %h2 Comments
     %ul.list-unstyled
       -@article.comments.each do |comment|
