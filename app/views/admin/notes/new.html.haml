@@ -1,3 +1,5 @@
+%h1="Yaaaaa"
+
 .row
   .col-md-8.col-md-offset-2
     %h3= @article.title
@@ -25,6 +27,8 @@
 
     %hr
 
+
+
     %h2 Notes
     %ul.list-unstyled
       -@article.notes.each do |note|
@@ -36,35 +40,14 @@
             -if note.notes_info
               =link_to 'delete', admin_article_note_path(note.article.id, note.id), controller: 'notes', method: :delete, data: {confirm: 'Are you sure?' } 
     %br/
-    
 
 
-    /Add Notes
-    =button_to "Add Notes", new_admin_article_note_path(@article), method: :get
-    
-
-
-    %h2 Comments
-    %ul.list-unstyled
-      -@article.comments.each do |comment|
-        %li
-          %blockquote.blockquote
-            %p.m-b-0=comment.body
-            %footer.blockquote-footer
-              =comment.name
-              /# %em=time_ago_in_words comment.id.generation_time
-            -if comment.body
-              =link_to 'delete', admin_article_comment_path(comment.article.id, comment.id), controller: 'comments', method: :delete, data: {confirm: 'Are you sure?' } 
+= form_for ([:admin, @article, @article.notes.build]) do |f|
+  = render 'shared/error_messages', target: @article
+  
+  .field
+    = f.label :notes_info, "Add notes here"
     %br/
-
-
-
-
-
-
-
-
-
-
-
-
+    = f.text_area :notes_info
+  .actions
+    = f.submit "Add Notes"

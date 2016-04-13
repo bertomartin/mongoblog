@@ -6,6 +6,7 @@ devise_for :users, path: 'admin', :controllers => { :sessions => "admin/sessions
   namespace :admin do
     resources :articles do
       resources :comments
+      resources :notes
     end 
     
     get '', to: 'dashboard#index', as: '/'

@@ -15,6 +15,7 @@ class Article
 
 
   embeds_many :comments
+  embeds_many :notes
 
   belongs_to :user
   resourcify
