@@ -21,14 +21,22 @@ class Admin::CommentsController < Admin::BaseController
 
   def create
     @comment = @article.comments.build(comment_params)
-    respond_to do |format|
-      if @comment.save
-        format.html {redirect_to @article, notice: 'Comment was successfully created.'}
-      else
-        format.html { redirect_to @article }
+    @user = User.find(current_user.id)
+    settings = @user.setting
+    
+    if settings[0]['how_to_email'] == 'email_weekly'
+      #do something
+    else
+      respond_to do |format|
+        if @comment.save
+          format.html {redirect_to @article, notice: 'Comment was successfully created.'}
+        else
+          format.html { redirect_to @article }
+        end
       end
     end
   end
+
 
   def update
   end

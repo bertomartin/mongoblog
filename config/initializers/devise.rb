@@ -7,16 +7,16 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` on Rails 4+ applications as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = '03fd78c68daa3ec667d8a22d9b0b15b325093584f47128f78ad657b311e8411b7bf27c92e9a5855308c7882f4beb3961d651f54feb44c7297092b05eb1361a00'
-  config.secret_key = '4c3dcd2d709c14733ddcfe1cc32d7e3f3421e4486de3883ef937db94ced0325e9b9ae7e14b4d35e5590b838cc163ae85fa739115e694768ec193c9d6361e75ca'
 
+  config.secret_key = '4c3dcd2d709c14733ddcfe1cc32d7e3f3421e4486de3883ef937db94ced0325e9b9ae7e14b4d35e5590b838cc163ae85fa739115e694768ec193c9d6361e75ca'
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  # config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = Rails.application.secrets.emailer# 'please-change-me-at-config-initializers-devise@example.com'
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = 'Devise::Mailer'
+  config.mailer = 'Devise::Mailer'
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
@@ -103,7 +103,7 @@ Devise.setup do |config|
   # config.pepper = 'cb69e6c24172bb762cdb66c98a0c9529bc2d2ea96b35edd7aec6a1a1484ec528504870df7c44d2e3346175567a0ac9717d263ad794613e8ab3084135e6e8b029'
 
   # Send a notification email when the user's password is changed
-  # config.send_password_change_notification = false
+  config.send_password_change_notification = true
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -187,7 +187,7 @@ Devise.setup do |config|
   # ==> Configuration for :recoverable
   #
   # Defines which key will be used when recovering the password for an account
-  # config.reset_password_keys = [:email]
+  config.reset_password_keys = [:email]
 
   # Time interval you can reset your password with a reset password key.
   # Don't put a too small interval or your users won't have the time to
@@ -196,7 +196,7 @@ Devise.setup do |config|
 
   # When set to false, does not sign a user in automatically after their password is
   # reset. Defaults to true, so a user is signed in automatically after a reset.
-  # config.sign_in_after_reset_password = true
+  config.sign_in_after_reset_password = false
 
   # ==> Configuration for :encryptable
   # Allow you to use another encryption algorithm besides bcrypt (default). You can use

@@ -1,6 +1,6 @@
 require 'mailgun'
 
-class CommentMailer < ApplicationMailer
+class CommentMailer < ::Devise::Mailer  #< ApplicationMailer
 	 default from: Rails.application.secrets.emailer
 
   def notify_on_comment(user, article)
@@ -23,5 +23,14 @@ class CommentMailer < ApplicationMailer
 
   def sign_up(user)
   end
+
+  def send_reset_password_instructions
+    @user = User.find(current_user.id)
+    mg_client = Mailgun::Client.new Rails.application.secrets.mailgun_api_key
+
+
+  end
+
+
 end
 
