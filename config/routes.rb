@@ -8,14 +8,16 @@ devise_for :users, path: 'admin', :controllers => { :sessions => "admin/sessions
       resources :comments
       resources :notes
     end 
-    
+
+       
     get '', to: 'dashboard#index', as: '/'
     resources :pages
     resource :profile
     resources :blog_details do
       post 'export_to_json', :on => :collection
-    end
 
+    end
+    
     resources :settings 
     # do 
     #   post "settings/:id", to: "settings#update", as: :settings
@@ -25,8 +27,10 @@ devise_for :users, path: 'admin', :controllers => { :sessions => "admin/sessions
   end
   
   resources :articles, only: [:show, :index] do
-    resources :comments
+    resources :comments    
   end
+
+  get 'feed' => 'articles#feed', as: :feed, :defaults => { :format => 'rss' }
 
 
   # resources :pages, only: [:show]
@@ -36,6 +40,8 @@ devise_for :users, path: 'admin', :controllers => { :sessions => "admin/sessions
   # Static pages
   #
  resources :user_subscription
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
