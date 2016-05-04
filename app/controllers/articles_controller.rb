@@ -57,10 +57,11 @@ class ArticlesController < ApplicationController
   # # GET /articles/1.json
   def show
     @comment = @article.comments.build
+    articles = @@mongodb[:articles]
 
-    client = Mongo::Client.new([ 'localhost' ], :database => 'mongoblog_development')
-    articles = client[:articles]
     articles.find("_id"=>@article.id).update_one("$inc" => { :view_count => 1 })
+    @related_articles = articles.find({tag: { "$in": @article.tag} }).find_all
+    # db.articles.find({ tag: { $all: ["Software"] } } )
   end
 
   # # GET /articles/new
@@ -111,9 +112,6 @@ class ArticlesController < ApplicationController
       format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
       format.json { head :no_content }
     end
-
-
-
   end
 
   private

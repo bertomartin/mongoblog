@@ -33,6 +33,15 @@
       .actions
         = f.submit
 
+    <br>
+    <br>
+    <br>
+    %h4= "You can check out related articles"
+    -@related_articles.each do |related_article|
+      -if @article.title != related_article["title"]
+        <br>
+        =link_to related_article["title"], article_path(related_article["_slugs"])
+
 
 
 

@@ -14,7 +14,7 @@ xml.rss :version => "2.0" do
       article.content
       xml.item do
         if article.authors
-          xml.title article.authors
+          xml.title article.authors.join
         else
           xml.title ""
         end

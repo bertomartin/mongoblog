@@ -14,7 +14,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -33,16 +33,31 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
+  config.action_mailer.raise_delivery_errors = true
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # ActionMailer Config
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  # change to true to allow email to be sent during development
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default :charset => "utf-8"
+
+
   config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.delivery_method = :smtp
+
   config.action_mailer.smtp_settings = {
   :authentication => :plain,
   :address => "smtp.mailgun.org",
   :port => 587,
-  :domain => "waynemorris.info.mailgun.org",
-  :user_name => "postmaster@waynemorris.info.mailgun.org",
+  enable_starttls_auto: true,
+  :domain => Rails.application.secrets.mailgun_domain,
+  :user_name => Rails.application.secrets.mailgun_username, 
   :password => Rails.application.secrets.mailgun_password
-}
+  }
+
 
 end

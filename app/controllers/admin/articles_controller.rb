@@ -24,6 +24,9 @@ class Admin::ArticlesController < Admin::BaseController
   # GET /articles/1.json
   def show    
     @comment = @article.comments.build
+
+    articles = @@mongodb[:articles]
+    @related_articles = articles.find({tag: { "$in": @article.tag} }).find_all
   end
 
   # GET /articles/new
