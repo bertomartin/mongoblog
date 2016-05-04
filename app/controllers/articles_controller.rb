@@ -60,7 +60,15 @@ class ArticlesController < ApplicationController
     articles = @@mongodb[:articles]
 
     articles.find("_id"=>@article.id).update_one("$inc" => { :view_count => 1 })
+
+    @article_present = articles.find({tag: { "$in": @article.tag} }).count    
     @related_articles = articles.find({tag: { "$in": @article.tag} }).find_all
+
+    if @article_present > 1
+      @related_articles
+    else
+      @related_articles = Article.order_by(view_count: :desc)
+    end
     # db.articles.find({ tag: { $all: ["Software"] } } )
   end
 

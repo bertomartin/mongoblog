@@ -26,7 +26,14 @@ class Admin::ArticlesController < Admin::BaseController
     @comment = @article.comments.build
 
     articles = @@mongodb[:articles]
+    @article_present = articles.find({tag: { "$in": @article.tag} }).count    
     @related_articles = articles.find({tag: { "$in": @article.tag} }).find_all
+
+    if @article_present > 1
+      @related_articles
+    else
+      @related_articles = Article.order_by(view_count: :desc)
+    end
   end
 
   # GET /articles/new
