@@ -26,7 +26,8 @@ xml.rss :version => "2.0" do
         else
           xml.pubDate ""
         end
-        xml.link "http://localhost:5000" + article.id.to_s + "-" + article.authors.join
+        # xml.link "http://localhost:3000/articles/" +  article.slugs.join('')
+        xml.link "http://wayne75.fwd.wf/articles/" +  article.slugs.join('')
         xml.guid article.id
 
         text = article.content

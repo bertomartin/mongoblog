@@ -2,6 +2,12 @@
 %h1 Listing Articles
 %h2 Top Articles
 
+
+/ rss feed
+=link_to (image_tag("/assets/rss_feed.png")), feed_path, :target => "_blank"
+=link_to "rss", feed_path, :target => "_blank"
+
+/ Top articles
 %p
 %div 
   %h2 
@@ -19,6 +25,7 @@
 <br>
 <br>
 
+/ Article Tags
 %h3 TAGS
 %span
   - @tag_list.each do |tag|
@@ -30,6 +37,7 @@
     %tr
       %th{:colspan => "3"}
 
+/ List of Articles
 %p
 %div 
   %h2 
@@ -60,10 +68,11 @@
       .read-more=link_to 'read more', article
       %hr
 
-
+  / Form for Subscribers
   = form_tag @user_subscriptions, :method => :get do
     = text_field_tag :email
     = submit_tag "Subscribe"
 %p
 
-
+=link_to image_tag("/assets/rss_feed.png"), url_for("feed")
+=link_to "rss", url_for("feed")
