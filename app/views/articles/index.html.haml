@@ -68,11 +68,16 @@
       .read-more=link_to 'read more', article
       %hr
 
-  / Form for Subscribers
-  = form_tag @user_subscriptions, :method => :get do
-    = text_field_tag :email
-    = submit_tag "Subscribe"
-%p
+/ Form for Subscribers
+= form_tag @user_subscriptions, :method => :get do
+  = text_field_tag :email
+  = submit_tag "Subscribe"
 
-=link_to image_tag("/assets/rss_feed.png"), url_for("feed")
-=link_to "rss", url_for("feed")
+/ -@current_articles.each do |article|
+/   %p= article.title
+
+
+=link_to "<<<", url: @scroll['prev']
+-for pg in 1..@number_of_pages
+  =link_to pg, url: pg
+=link_to ">>>", url: @scroll['next']
