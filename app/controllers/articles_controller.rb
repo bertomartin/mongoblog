@@ -14,30 +14,22 @@ class ArticlesController < ApplicationController
   # # GET /articles
   # # GET /articles.json
   def index
-    #Check when come back
-    # @total_articles = Article.all.count
-    # offset = 3
-    # @number_of_pages = (@total_articles.to_f / offset.to_f).ceil
-    # second_to_last_page =  (@number_of_pages - 1) * offset
+
     @current_page = 1
     @top_articles = Article.order_by(view_count: :desc)     
     @tag_list = Article.distinct(:tag)
 
-    if params[:url] and params[:url].match('[A-Za-z]')
-      # byebug
-      # @total_articles = Article.all_in(tag: params[:url]).count
-      # offset = 3
-      # @number_of_pages = (@total_articles.to_f / offset.to_f).ceil
-      # second_to_last_page =  (@number_of_pages - 1) * offset
-      # articles = Article.all_in(tag: params[:url])
-
+    if params[:url] #and params[:url].match('[A-Za-z]')
+      params_url = params[:url]
       articles =  Article.all_in(tag: params[:url])
       page_info = get_page_params(articles)
       @number_of_pages = page_info['number_of_pages']
 
       @scroll = page_scroll(params, @number_of_pages)
-      if params[:url].to_i > 0 && params[:url].to_i > 1
-         @current_page = (params[:url].to_i * page_info['offset']).to_i
+      @scroll_tag = true
+
+      if params[:pg].to_i > 0 && params[:pg].to_i > 1
+         @current_page = (params[:pg].to_i * page_info['offset']).to_i
          @articles =  articles.skip(@current_page - page_info['offset']).limit(page_info['offset']) 
       else
           @articles = articles.limit(page_info['offset'])      
@@ -48,30 +40,13 @@ class ArticlesController < ApplicationController
       @number_of_pages = page_info['number_of_pages']
 
       @scroll = page_scroll(params, @number_of_pages)
-      if params[:url].to_i > 0 && params[:url].to_i > 1
-         @current_page = (params[:url].to_i * page_info['offset']).to_i
+      if params[:pg].to_i > 0 && params[:pg].to_i > 1
+         @current_page = (params[:pg].to_i * page_info['offset']).to_i
          @articles =  Article.skip(@current_page - page_info['offset']).limit(page_info['offset']) 
       else
           @articles = Article.limit(page_info['offset'])      
       end
     end
-
-    # if params[:url].to_i > 0 && params[:url].to_i > 1
-    #    @current_page = (params[:url].to_i * offset).to_i
-    #    @current_articles =  Article.skip(@current_page - offset).limit(offset) 
-    # else
-    #   @current_articles = Article.limit(offset)      
-    # end
-
-    # @page_count = @@mongodb[:articles].({"$skip"=> 2}, {"limit" => 2})
-
-    # @top_articles = Article.order_by(view_count: :desc)     
-    # @tag_list = Article.distinct(:tag)
-    # # if params[:url]
-    #   @articles = Article.all_in(tag: params[:url])
-    # else
-    #   @articles = Article.all
-    # end
 
     @user_subscription = UserSubscription.new
     #TODO Check for valid email. Add email confirmation to ensure valid emails are added.    
@@ -185,25 +160,29 @@ class ArticlesController < ApplicationController
     def get_page_params articles
       page_params = {}
       page_params['total_articles'] = articles.count
-      page_params['offset'] = 3
+      page_params['offset'] = 2
       page_params['number_of_pages'] = (page_params['total_articles'] .to_f / page_params['offset'].to_f).ceil
       page_params['second_to_last_page'] =  (page_params['number_of_pages'] - 1) * page_params['offset']
-      @current_page = 1
       page_params
     end
 
     def page_scroll (params, pages)
+      page_num = params[:pg].to_i
+      if page_num == 0
+        page_num = 1
+      end
+      
       next_p = 1
       prev = 1
       scroll = {}
-      if params[:url].to_i <= pages - 1
-        next_p = params[:url].to_i + 1
+      if page_num <= pages - 1 && page_num
+        next_p = page_num + 1
       else
-         next_p = params[:url].to_i
+         next_p = page_num 
       end
 
-      if params[:url].to_i >= 1
-        prev = params[:url].to_i - 1
+      if page_num >= 1
+        prev = page_num - 1
         if prev == 0
           prev = 1
         end
