@@ -1,18 +1,35 @@
+require 'will_paginate'
 class Admin::ArticlesController < Admin::BaseController
+  include ApplicationHelper
   
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   
   # GET /articles
   # GET /articles.json
-  def index    
+  def index   
+
+    @current_page = 1
     @top_articles = Article.order_by(view_count: :desc)     
     @tag_list = Article.distinct(:tag)
 
-    if params[:url]
-      @articles = Article.all_in(tag: params[:url])
+    if params[:url] #and params[:url].match('[A-Za-z]')
+      params_url = params[:url]
+      articles =  Article.all_in(tag: params[:url])
+      page_info = get_page_params(articles)
+      @number_of_pages = page_info['number_of_pages']
+
+      #These are appliction helper functions
+      @scroll = page_scroll(params, @number_of_pages)
+      @scroll_tag = true
+      @articles = get_articles(params, page_info['offset'], articles)
     else
-      @articles = Article.all
-    end    
+      articles =  Article.all
+      page_info = get_page_params(articles)
+      @number_of_pages = page_info['number_of_pages']
+
+      @scroll = page_scroll(params, @number_of_pages)  #from ApplicationHelper
+      @articles = get_articles(params, page_info['offset'], articles) #from ApplicationHelper
+    end  
     
     respond_to do |format|
       format.html # index.html.erb
