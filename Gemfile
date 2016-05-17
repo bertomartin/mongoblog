@@ -64,3 +64,7 @@ gem 'gibbon', github: "amro/gibbon"
 gem 'sucker_punch', '~> 1.0'
 gem 'mailchimp-api', require: 'mailchimp'
 gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
+# gem 'acts-as-taggable-on', '~> 3.4'
+# gem 'classifier-reborn'
+gem 'will_paginate'
+gem 'kaminari'

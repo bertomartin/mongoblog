@@ -72,22 +72,24 @@
 = link_to 'New Article', new_admin_article_path
 %p
 
+%p=paginate @articles
+%p=page_entries_info @articles
 
--if @scroll_tag 
-  -prev_url  = url_for(params.merge(pg: @scroll['prev']))
-  =link_to "Prev", prev_url
+/ -if @scroll_tag 
+/   -prev_url  = url_for(params.merge(pg: @scroll['prev']))
+/   =link_to "Prev", prev_url
 
-  -for pg in 1..@number_of_pages
-    -tag_url = url_for(params.merge(pg: pg))
-    =link_to pg, tag_url
+/   -for pg in 1..@number_of_pages
+/     -tag_url = url_for(params.merge(pg: pg))
+/     =link_to pg, tag_url
     
-  -next_url  = url_for(params.merge(pg: @scroll['next']))
-  =link_to "Next", next_url
--else
-  =link_to "Prev", pg: @scroll['prev']
-  -for pg in 1..@number_of_pages
-    =link_to pg, pg: pg
-  =link_to "Next", pg: @scroll['next']
+/   -next_url  = url_for(params.merge(pg: @scroll['next']))
+/   =link_to "Next", next_url
+/ -else
+/   =link_to "Prev", pg: @scroll['prev']
+/   -for pg in 1..@number_of_pages
+/     =link_to pg, pg: pg
+/   =link_to "Next", pg: @scroll['next']
 
 
 

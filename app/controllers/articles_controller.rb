@@ -2,7 +2,6 @@ require 'mailchimp'
 
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
-  
 
   def feed
     @articles = Article.all
@@ -14,28 +13,17 @@ class ArticlesController < ApplicationController
   # # GET /articles
   # # GET /articles.json
   def index
-
+    offset = get_page_offset
     @current_page = 1
     @top_articles = Article.order_by(view_count: :desc)     
     @tag_list = Article.distinct(:tag)
-
-    if params[:url] #and params[:url].match('[A-Za-z]')
+    
+    if params[:url] 
       params_url = params[:url]
       articles =  Article.all_in(tag: params[:url])
-      page_info = get_page_params(articles)
-      @number_of_pages = page_info['number_of_pages']
-
-      #These are appliction helper functions
-      @scroll = page_scroll(params, @number_of_pages)
-      @scroll_tag = true
-      @articles = get_articles(params, page_info['offset'], articles)
+      @articles = articles.page(params[:page]).per(offset)
     else
-      articles =  Article.all
-      page_info = get_page_params(articles)
-      @number_of_pages = page_info['number_of_pages']
-
-      @scroll = page_scroll(params, @number_of_pages)  #from ApplicationHelper
-      @articles = get_articles(params, page_info['offset'], articles) #from ApplicationHelper
+      @articles = Article.page(params[:page]).per(offset)
     end
 
     @user_subscription = UserSubscription.new
