@@ -1,8 +1,13 @@
 module ApplicationHelper
+  def get_page_offset
+    offset = 3
+    offset.to_i
+  end
+
 	def get_page_params articles
       page_params = {}
+      page_params['offset'] = 3
       page_params['total_articles'] = articles.count
-      page_params['offset'] = 2
       page_params['number_of_pages'] = (page_params['total_articles'] .to_f / page_params['offset'].to_f).ceil
       page_params['second_to_last_page'] =  (page_params['number_of_pages'] - 1) * page_params['offset']
       page_params
